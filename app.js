@@ -14,10 +14,7 @@ app.set("view engine", "mustache");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(require("./routes/users"))
-
-app.get("/", function(req, res){
-  res.render("index", {user: user.all});
-})
+app.use(require("./routes/index"))
 
 if (require.main === module) {
   client.connect((client) => {

@@ -5,11 +5,11 @@ let client = {
   connect: connect
 }
 
-function conect(callback) {
+function connect(callback) {
   let mongoClient = mongo.MongoClient;
-  let baseUrl = "mongodb://localhost:27017//robots";
+  let baseUrl = "mongodb://localhost:27017/robots";
 
-  mongoClient.connect(url, (err, db) => {
+  mongoClient.connect(baseUrl, (err, db) => {
     if (err) {
       throw err;
       exit(1);

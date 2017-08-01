@@ -1,13 +1,13 @@
 const mongo = require('mongodb');
-const client = require("./dbConnections");
+const client = require("../dbConnections");
 
-function findByUserID(id) {
-  return users.find((el) => {
-    return el.id == id;
-  })
+function findAll(callback) {
+  let profiles = client.db.collection("profiles")
+  profiles.find({}).toArray((err, data) => {
+    callback(data);
+  });
 }
 
 module.exports = {
-  "all": users,
-  "findByUserID": findByUserID
+  findAll: findAll
 }
