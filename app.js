@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("./routes/users"))
 app.use(require("./routes/index"))
 
+
 if (require.main === module) {
   client.connect((client) => {
     app.listen(app.get("port"), err => {

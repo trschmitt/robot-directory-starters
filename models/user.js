@@ -1,13 +1,24 @@
 const mongo = require('mongodb');
 const client = require("../dbConnections");
 
+///////mongo code
 function findAll(callback) {
-  let profiles = client.db.collection("profiles")
+  let profiles = client.db.collection("profiles");
   profiles.find({}).toArray((err, data) => {
     callback(data);
   });
 }
 
+function findById(id, callback) {
+  let profiles = client.db.collection("profiles");
+  profiles.findOne({"id": id}, (err, data) => {
+    callback(data);
+  });
+
+}
+///////end of mongo code
+
 module.exports = {
-  findAll: findAll
+  findAll: findAll,
+  findById: findById
 }
