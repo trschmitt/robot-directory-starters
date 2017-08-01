@@ -4,7 +4,6 @@ const user = require("../models/user");
 
 router.get('/:id', (req, res) => {
   user.findById(parseInt(req.params.id), (data) => {
-
     res.render('profile', data);
   })
 })
