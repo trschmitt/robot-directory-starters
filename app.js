@@ -3,7 +3,10 @@ const mustacheExpress = require("mustache-express");
 const path = require("path");
 const user = require("./models/user");
 const app = express();
-const mongo = require('mongo');
+//////mongo connections//////
+const client = require("./dbConnections");
+
+app.set("port", process.env.PORT || 3010);
 
 app.engine("mustache", mustacheExpress());
 app.set("views", "./views");
@@ -16,10 +19,14 @@ app.get("/", function(req, res){
   res.render("index", {user: user.all});
 })
 
-///////// mongo code is going to be here taking over the app.listen functionality bellow//////
-//////all mongo data is within the server file//////
-
-
-app.listen(3010, function(){
-  console.log("Node running successfully on http://localhost:3010");
-});
+if (require.main === module) {
+  client.connect((client) => {
+    app.listen(app.get("port"), err => {
+      if (err) {
+        throw err;
+        exit(1);
+      }
+      console.log(`Node running in ${app.get("env")} mode @ http://localhost:${app.get("port")}`);
+    })
+  })
+}
