@@ -1,4 +1,4 @@
-const mongo = require('mongodb');
+const mongo = require("mongodb");
 const client = require("../dbConnections");
 
 ///////mongo code
@@ -11,7 +11,7 @@ function findAll(callback) {
 
 function findById(id, callback) {
   let profiles = client.db.collection("profiles");
-  profiles.findOne({"id": id}, (err, data) => {
+  profiles.findOne({ id: id }, (err, data) => {
     callback(data);
   });
 }
@@ -19,16 +19,20 @@ function findById(id, callback) {
 //////edit these properly//////
 function findAllEmployed(callback) {
   let profiles = client.db.collection("profiles");
-  profiles.find({"job": {$ne: null}}.toArray((err, data) => {
-    callback(data);
-  });
+  profiles.find(
+    { job: { $ne: null } }.toArray((err, data) => {
+      callback(data);
+    })
+  );
 }
 
 function finAllUnemployed(callback) {
   let profiles = client.db.collection("profiles");
-  profiles.find({"job": null}.toArray((err, data) => {
-    callback(data);
-  });
+  profiles.find(
+    { job: null }.toArray((err, data) => {
+      callback(data);
+    })
+  );
 }
 /////////////////////////
 ///////end of mongo code/////////
@@ -36,4 +40,4 @@ function finAllUnemployed(callback) {
 module.exports = {
   findAll: findAll,
   findById: findById
-}
+};

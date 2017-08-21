@@ -8,4 +8,10 @@ router.get('/:id', (req, res) => {
   })
 })
 
+router.get('/:id', (req, res) => {
+  user.find(parseInt(req.params.id), (data) => {
+    res.render('profile', data);
+  })
+})
+
 module.exports = router;
